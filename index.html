@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>Kalkulator cenowy paczek</h1>
+    </header>
+    <section class="courier">
+        <h2>Tu będziemy wprowadzać nowego kuriera</h2>
+    </section>
+    <section class="calc">
+        <h2>Kalkulator cenowy: </h2>
+        <form class='formcalc'>
+            <h3>Wymiary i waga: </h3>
+            <label for="width">
+                <p>Szerokość: </p>
+                <input name='width' type="number" placeholder="CM" max="200">
+            </label>
+            <label for="heigth">
+                <p>Wysokość: </p>
+                <input name='heigth' type="number" placeholder="CM" max="200">
+            </label>
+            <label for="length">
+                <p>Długość: </p>
+                <input name="length" type="number" placeholder="CM" max="200">
+            </label>
+            <label for="weigth">
+                <p>Waga: </p>
+                <input name="weigth" type="number" placeholder="KG" max="50">
+            </label>
+
+
+
+        </form>
+        <form class="services">
+            <h3>Usługi dodatkowe: </h3>
+            <label for="custom">
+                <p>Przesyłka niestandardowa?</p>
+                <input name='custom' type="checkbox">
+                <p class="danger" style="display: none; color: red">Paczka niestandardowa! Zaznacz opcję!</p>
+            </label>
+            <label for="insurance">
+                <p>Ubezpieczenie: </p>
+                <input name='insurance' type="number" placeholder="ZŁ">
+            </label>
+            <label for="cod">
+                <p>Wartość pobrania: </p>
+                <input name="cod" type="number" placeholder="ZŁ">
+            </label>
+
+        </form>
+        <button class="calculator">Wylicz cenę!</button>
+    </section>
+    <section class="proposal">
+        <h3>Mamy następujące propozycje przewozu:</h3>
+        <div class="prices"></div>
+    </section>
+    <script src='Calculator.js' type="module"></script>
+    <script src='Courier.js' type="module"></script>
+    <script src='CourierDHL.js' type="module"></script>
+
+    <script src='System.js' type="module"></script>
+    <script src='main.js' type="module"></script>
+
+
+</body>
+
+</html>
