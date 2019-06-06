@@ -11,6 +11,7 @@ export default class Calculator {
         this.sizes.forEach(size =>
             size.addEventListener("change", this.inputValueChecked.bind(this))
         );
+
         this.services = this.formServices.querySelectorAll("input");
         this.join = false; // flaga do walidacji inputów wagowych i wymiarowych - przekazywana dalej!
         this.inputValueFlag = false; // flaga sprawdzająca każdego inputa z osobna
@@ -37,7 +38,7 @@ export default class Calculator {
 
     // Metoda do weryfikacji bieżącej inputa i jego wartości - w konstrukcji
     inputValueChecked(e) {
-        if (!e.target.value || e.target.value > 200) {
+        if (!e.target.value || e.target.value * 1 > 200) {
             // sprawdza, czy nie pusty string i czy nie przekracza 200
             e.target.style.border = "2px solid red";
             this.inputValueFlag = false;
@@ -45,7 +46,7 @@ export default class Calculator {
             e.target.style.border = "";
             this.inputValueFlag = true;
         }
-        if (this.sizes[3].value > 50) {
+        if (this.sizes[3].value * 1 > 50) {
             // sprawdza, czy waga jest mniejsza od 50
             this.sizes[3].style.border = "2px solid red";
             this.inputValueFlag = false;
@@ -53,9 +54,22 @@ export default class Calculator {
             this.sizes[3].style.border = "";
             this.inputValueFlag = true;
         }
-        if ((this.sizes[0].value > 120 || this.sizes[1].value > 120 || this.sizes[2].value > 120) || ((this.sizes[0].value + this.sizes[1].value + this.sizes[2].value) > 220) && !this.checkBox.checked) { // weryfikacja, czy któryś z wymiarów nie przekracza 120 cm, lub suma 220, a jeśli tak, to czy zaznaczono Niestandard
-            this.inputValueFlag = false;
-            this.danger.style.display = 'inline' // komunikat, o konieczności załączenia usługi niestandard
+        if (
+            ((this.sizes[0].value * 1 > 120 || this.sizes[1].value * 1 > 120 || this.sizes[2].value * 1 > 120) ||
+                ((this.sizes[0].value * 1 + this.sizes[1].value * 1 + this.sizes[2].value * 1) > 220) &&
+                (this.sizes[0].value != '' &&
+                    this.sizes[1].value != '' &&
+                    this.sizes[2].value != ''))) {
+            if (!this.checkBox.checked) {
+                // weryfikacja, czy któryś z wymiarów nie przekracza 120 cm, lub suma 220, a jeśli tak, to czy zaznaczono Niestandard
+
+
+                this.inputValueFlag = false;
+                this.danger.style.display = 'inline' // komunikat, o konieczności załączenia usługi niestandard
+            } else {
+                this.inputValueFlag = true;
+                this.danger.style.display = 'none' // zamknięcie ostrzeżenia
+            }
         } else {
             this.inputValueFlag = true;
             this.danger.style.display = 'none' // zamknięcie ostrzeżenia

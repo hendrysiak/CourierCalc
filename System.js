@@ -7,44 +7,19 @@ export default class System {
     this.calc = new Calculator();
     this.btn = document.querySelector(".calculator");
     this.btn.addEventListener("click", this.renderProposal.bind(this));
-    this.courierCompany = [
-      {
-        name: "InPost",
-        prices: [
-          16.9, //5 kg
-          19.9, //10 kg
-          22.9, //20 kg
-          24.9, //30 kg
-          59.9, //40 kg
-          69.9 //50 kg
-        ],
-        servicesPrices: [
-          15, //custom
-          2.5, //insurance
-          2.5 //cod
-        ],
-        gaugeDivider: 6000
-      },
-      {
-        name: "DHL",
-        prices: [
-          18.9, //5 kg
-          24.9, //10 kg
-          24.9, //20 kg
-          29.9, //30 kg
-          75 //drobnica, powyżej 31,5 kg
-        ],
-        servicesPrices: [
-          30, //custom
-          2.5, //insurance
-          2.5 //cod
-        ],
-        gaugeDivider: 4000
-      }
-    ];
+
+    this.courierCompany = [];
+    this.fetchingPrices();
+  }
+  fetchingPrices() {
+    let api = 'https://gist.githubusercontent.com/hendrysiak/8beff81dfbc5ea65a8e5f92866bc7b25/raw/82ff40ed9139358fed5f8897a38cb18fbd6585a9/gistfile1.txt'
+
+    fetch(api).then(resp => resp.json()).catch(error => console.log("Błąd pobierania danych z serwera", error)).then(data => data.forEach(price => this.courierCompany.push(price)))
+
   }
 
   renderProposal(e) {
+    // this.fetchingPrices();
     console.log(this.calc.join);
     e.preventDefault();
     if (this.calc.join) {
